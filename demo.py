@@ -26,6 +26,8 @@ def load_image(imfile):
 def viz(img, flo):
     img = img[0].permute(1,2,0).cpu().numpy()
     flo = flo[0].permute(1,2,0).cpu().numpy()
+
+    print(flo.shape)
     
     # map flow to rgb image
     flo = flow_viz.flow_to_image(flo)
@@ -60,6 +62,10 @@ def demo(args):
             image1, image2 = padder.pad(image1, image2)
 
             flow_low, flow_up = model(image1, image2, iters=20, test_mode=True)
+            print(flow_up)
+            print(flow_up.max())
+            print(flow_up.min())
+            exit()
             viz(image1, flow_up)
 
 
